@@ -3,20 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Load resize.png</title>
+  <title>get his fatass of the screen 💔</title>
   <style>
-    /* Make the body full height and use flexbox to center */
-    body, html {
+    html, body {
       height: 100%;
       margin: 0;
+      background-color: black;
+      overflow: hidden;
       display: flex;
-      justify-content: center; /* horizontal center */
-      align-items: center;     /* vertical center */
-      background: #f0f0f0;     /* optional background */
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      user-select: none;
+    }
+    img {
+      cursor: pointer;
+      max-width: 80vw;
+      max-height: 80vh;
+      z-index: 10;
+      position: relative;
+    }
+    .emoji {
+      position: fixed;
+      font-size: 24px;
+      pointer-events: none;
+      user-select: none;
+      animation: floatUp 2s ease forwards;
+      z-index: 1000;
+    }
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1.5);
+      }
     }
   </style>
 </head>
 <body>
-  <img src="resize.png" alt="resize image" />
+  <img src="resize.png" alt="resize image" id="clickableImage" />
+
+  <script>
+    const img = document.getElementById('clickableImage');
+    let spamming = false;
+    let spamInterval;
+
+    function randomPosition() {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      return { x, y };
+    }
+
+    function spawnEmoji() {
+      const emoji = document.createElement('div');
+      emoji.className = 'emoji';
+      emoji.textContent = '💔';
+
+      const pos = randomPosition();
+      emoji.style.left = `${pos.x}px`;
+      emoji.style.top = `${pos.y}px`;
+
+      document.body.appendChild(emoji);
+
+      // Remove the emoji after animation ends (2s)
+      setTimeout(() => {
+        emoji.remove();
+      }, 2000);
+    }
+
+    img.addEventListener('click', () => {
+      if (spamming) {
+        clearInterval(spamInterval);
+        spamming = false;
+      } else {
+        spamming = true;
+        spamInterval = setInterval(spawnEmoji, 100);
+      }
+    });
+  </script>
 </body>
 </html>
