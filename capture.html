@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>im always watching polar...</title>
+</head>
+<body>
+    <h1>Captured Image</h1>
+    <img id="captureImage" src="" alt="Captured Image" style="max-width: 100%; height: auto;">
+    <script>
+        fetch('https://polarbackup.org/capture')
+            .then(response => response.blob())
+            .then(imageBlob => {
+                const imageObjectURL = URL.createObjectURL(imageBlob);
+                document.getElementById('captureImage').src = imageObjectURL;
+            })
+            .catch(error => {
+                console.error('Error fetching the image:', error);
+            });
+    </script>
+</body>
+</html>
