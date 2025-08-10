@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>im always watching polar...</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+        }
+        img#captureImage {
+            width: 1920px;
+            height: 1080px;
+            object-fit: contain;
+            background-color: #222;
+            margin-top: 20px;
+            border: 2px solid #fff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Captured Image</h1>
-    <img id="captureImage" src="" alt="Captured Image" style="max-width: 100%; height: auto;">
+    <h1>im always watching polar...</h1>
+    <img id="captureImage" src="" alt="Captured Image" />
     <script>
         fetch('https://polarbackup.org/capture')
             .then(response => response.blob())
